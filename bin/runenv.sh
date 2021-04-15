@@ -2,7 +2,7 @@
 #!/bin/bash
 
 GROUP="docker"
-CONTAINER_BASENAME="CONTAINER_BASENAME"
+CONTAINER_BASENAME="app"
 # NETWORK_NAME = "newsapi_default"
 
 # if (docker network ls | select-string $NETWORK_NAME -Quiet )
