@@ -27,8 +27,7 @@ class AddApiTokenToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('api_token');
-            $table->dropColumn('api_token_expiration');
+            $table->dropColumn(['api_token', 'api_token_expiration']);
         });
     }
 }
