@@ -25,3 +25,5 @@ POST http://localhost:5001/api/login
 "email": "test@test.com",
 "password": "123456",
 }
+
+php artisan make:migration add_api_token_to_users --table=users
