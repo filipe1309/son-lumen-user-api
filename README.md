@@ -49,7 +49,7 @@ docker-compose exec app-php-fpm php artisan migrate --seed
 After up the container:
 
 ```sh
-docker exec -t CONTAINER_NAME ./vendor/bin/phpunit --testdox
+docker exec -t app-php-fpm ./vendor/bin/phpunit
 ```
 
 ## Contributing
