@@ -38,12 +38,6 @@ docker-compose exec app-php-fpm php artisan migrate --seed
 ./bin/runenv.sh
 ```
 
-## Usage
-
-```sh
-./bin/runenv.sh
-```
-
 ## :white_check_mark: Tests
 
 After up the container:

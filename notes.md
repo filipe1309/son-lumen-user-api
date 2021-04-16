@@ -27,3 +27,9 @@ POST http://localhost:5001/api/login
 }
 
 php artisan make:migration add_api_token_to_users --table=users
+
+docker-compose exec app-php-fpm php artisan migrate --seed
+
+docker-compose exec app-php-fpm php artisan migrate:refresh --seed
+
+composer require doctrine/dbal
