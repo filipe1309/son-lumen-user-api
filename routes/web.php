@@ -28,9 +28,27 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'email' =>    'required | email | max:255 | unique:users',
             'password' => 'required | min:6 | max:16 | confirmed',
         ]);
+
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
-        $model = User::create($data);
-        return response()->json($model, 201);
+        $user = User::create($data);
+
+        return response()->json($user, 201);
+    });
+
+    $router->post('/login', function (Request $request) {
+        $this->validate($request, [
+            'email' =>    'required | email',
+            'password' => 'required',
+        ]);
+
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $user = User::where('email', '=', $email)->first();
+        if (!$user || Hash::check($password, $user->password)) {
+            return response()->json(['message' => 'Invalid credentials'], 400);
+        }
+
+        return response()->json($user, 201);
     });
 });

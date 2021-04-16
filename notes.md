@@ -12,4 +12,16 @@ php artisan make:seeder UsersTableSeeder
 
 php artisan db:seed
 
-http://localhost:5001/api/users
+POST http://localhost:5001/api/users
+{
+"email": "test3@test.com",
+"name": "Testerson2",
+"password": "123456",
+"password_confirmation": "1234561"
+}
+
+POST http://localhost:5001/api/login
+{
+"email": "test@test.com",
+"password": "123456",
+}
