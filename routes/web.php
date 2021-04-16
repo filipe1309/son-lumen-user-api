@@ -3,6 +3,7 @@
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,6 +24,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/users', function (Request $request) {
+        dd($request->user());
         $this->validate($request, [
             'name' =>     'required | max:255',
             'email' =>    'required | email | max:255 | unique:users',
@@ -49,6 +51,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             return response()->json(['message' => 'Invalid credentials'], 400);
         }
 
-        return response()->json($user, 201);
+        $user->api_token = sha1(Str::random(32)) . '.' . sha1(Str::random(32));
+        $user->save();
+
+        return [
+            'api_token' => $user->api_token
+        ];
     });
 });
