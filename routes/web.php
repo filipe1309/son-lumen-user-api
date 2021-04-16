@@ -24,7 +24,6 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/users', function (Request $request) {
-        dd($request->user());
         $this->validate($request, [
             'name' =>     'required | max:255',
             'email' =>    'required | email | max:255 | unique:users',
@@ -63,6 +62,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/clients', function (Request $request) {
             return ['ok'];
+        });
+
+        $router->get('/user-auth', function (Request $request) {
+            return $request->user();
         });
     });
 });
