@@ -1,4 +1,4 @@
-# <p align="center">Luemn Intermediary</p>
+# <p align="center">SON - Lumen User API</p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/php-8.0-green" alt="PHP"/>
@@ -6,7 +6,7 @@
 
 ## 💬 About
 
-This project was developed following School of Net [COURSE_NAME](https://couse_link.com) course.
+This project was developed following School of Net [Lumen Intermediário](https://www.schoolofnet.com/curso/php/lumen/lumen-intermediario/3945) course.
 
 ## :computer: Technologies
 

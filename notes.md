@@ -11,3 +11,5 @@ php artisan migrate
 php artisan make:seeder UsersTableSeeder
 
 php artisan db:seed
+
+http://localhost:5001/api/users
