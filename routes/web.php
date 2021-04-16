@@ -2,6 +2,10 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,4 +19,13 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('/users', function (Request $request) {
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        $model = User::create($data);
+        return response()->json($model, 201);
+    });
 });
