@@ -58,4 +58,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'api_token' => $user->api_token
         ];
     });
+
+
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->get('/clients', function (Request $request) {
+            return ['ok'];
+        });
+    });
 });
