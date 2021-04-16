@@ -40,7 +40,7 @@ if [ ! -f images/development.env ]; then
 fi
 
 # Update pre-push git hook
-cp bin/pre-push .git/hooks/pre-push
+# cp bin/pre-push .git/hooks/pre-push
 
 ln -sf images/development.env .env
 docker-compose up --build

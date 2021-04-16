@@ -22,6 +22,14 @@ This project was developed following School of Net [COURSE_NAME](https://couse_l
 ./bin/runenv.sh
 ```
 
+```sh
+docker-compose exec app-php-fpm touch database/database.sqlite
+```
+
+```sh
+docker-compose exec app-php-fpm php artisan migrate --seed
+```
+
 ## :runner: Running
 
 **Up app**
