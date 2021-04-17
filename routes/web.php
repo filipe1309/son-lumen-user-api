@@ -4,6 +4,8 @@
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Notifications\AccountCreated;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +37,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
+        Notification::send($user, new AccountCreated($user));
 
         return response()->json($user, 201);
     });

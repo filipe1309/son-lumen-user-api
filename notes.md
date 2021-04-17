@@ -47,3 +47,7 @@ sqlite> SELECT \* FROM users WHERE id = 1;
 composer require illuminate/mail
 
 composer require illuminate/notifications
+
+## Class 13
+
+https://mailtrap.io/
