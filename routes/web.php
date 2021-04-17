@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -62,6 +63,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'api_token_expiration' => $user->api_token_expiration
         ];
     });
+
+    $router->post('/refresh-token', ['middleware' => 'auth', function () use ($router) {
+        $user = Auth::user();
+        $expiration = new Carbon();
+        $expiration->addHour(2);
+        $user->api_token = sha1(Str::random(32)) . '.' . sha1(Str::random(32));
+        $user->api_token_expiration = $expiration->format('Y-m-d H:i:s');
+        $user->save();
+
+        return [
+            'api_token' => $user->api_token,
+            'api_token_expiration' => $user->api_token_expiration
+        ];
+    }]);
 
 
     $router->group(['middleware' => ['auth', 'token-expired']], function () use ($router) {
