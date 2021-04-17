@@ -2,6 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Models\Client;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Notifications\AccountCreated;
@@ -100,9 +101,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     }]);
 
 
-    $router->group(['middleware' => ['auth', 'token-expired']], function () use ($router) {
+    // Restric Area
+    $router->group(['middleware' => ['auth', 'is-verified', 'token-expired']], function () use ($router) {
         $router->get('/clients', function (Request $request) {
-            return ['ok'];
+            return Client::all();
         });
 
         $router->get('/user-auth', function (Request $request) {

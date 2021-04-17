@@ -63,3 +63,11 @@ php artisan migrate
 php artisan migrate:refresh --seed
 
 php artisan migrate:rollback
+
+## Class 15
+
+php artisan make:migration create_clients_table
+
+php artisan make:seeder ClientsTableSeeder
+
+php artisan migrate:refresh --seed
