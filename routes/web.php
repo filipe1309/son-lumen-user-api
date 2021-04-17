@@ -2,6 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -50,16 +51,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             return response()->json(['message' => 'Invalid credentials'], 400);
         }
 
+        $expiration = new Carbon();
+        $expiration->addHour(2);
         $user->api_token = sha1(Str::random(32)) . '.' . sha1(Str::random(32));
+        $user->api_token_expiration = $expiration->format('Y-m-d H:i:s');
         $user->save();
 
         return [
-            'api_token' => $user->api_token
+            'api_token' => $user->api_token,
+            'api_token_expiration' => $user->api_token_expiration
         ];
     });
 
 
-    $router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->group(['middleware' => ['auth', 'token-expired']], function () use ($router) {
         $router->get('/clients', function (Request $request) {
             return ['ok'];
         });
