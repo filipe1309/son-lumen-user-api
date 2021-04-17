@@ -14,13 +14,19 @@ class AccountCreated extends Notification
     private User $user;
 
     /**
+     * @var
+     */
+    private $redirect;
+
+    /**
      * AccountCreated contructor.
      *
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $redirect)
     {
         $this->user = $user;
+        $this->redirect = $redirect;
     }
 
     public function via($notifiable)
@@ -34,7 +40,7 @@ class AccountCreated extends Notification
             ->subject('Your account has been created')
             ->greeting("Hi {$this->user->name},")
             ->line('Your account has been created')
-            ->action('Access this address to validade', url('/'))
+            ->action('Access this address to validade', $this->redirect)
             ->line('Thanks for using our app')
             ->salutation('Att,');
     }
