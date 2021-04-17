@@ -1,0 +1,91 @@
+
+# Alive
+GET http://localhost:5001/
+
+# Return
+# Lumen (8.2.3) (Laravel Components ^8.0)
+
+###
+
+# Login
+POST http://localhost:5001/api/login
+{
+    "email": "admin@user.com",
+    "password": "123456"
+}
+
+# Return
+# {
+#   "api_token": "c97679065667b1d1856926f8815a24616e7ee928.cef828607d045d46a1b0b440c195a8d37e1d0650",
+#   "api_token_expiration": "2021-04-17 02:04:54"
+# }
+
+###
+
+# Create User
+POST http://localhost:5001/api/users
+{
+    "email": "test1@test.com",
+    "name": "Testerson1",
+    "password": "123456",
+    "password_confirmation": "123456",
+    "redirect": "http://localhost:5001"
+}
+
+# Return
+# {
+#   "email": "test1@test.com",
+#   "name": "Testerson1",
+#   "updated_at": "2021-04-17T02:48:41.000000Z",
+#   "created_at": "2021-04-17T02:48:41.000000Z",
+#   "id": 24
+# }
+
+###
+
+# User auth info
+GET http://localhost:5001/api/user-auth?api_token=26a9926ae6422df678dce706855927872542ca23.7ab04e1ba37588cee39e6ecceb9f896164813be8
+
+# Return
+# {
+#   "id": 24,
+#   "name": "Testerson13",
+#   "email": "test13@test.com",
+#   "created_at": "2021-04-17T02:48:41.000000Z",
+#   "updated_at": "2021-04-17T02:51:59.000000Z"
+# }
+
+###
+
+# Refresh Token
+POST http://localhost:5001/api/refresh-token
+{
+    "api_token": "7dcbfd203cb2a1c8401915c0c0ea2ffad04cfb5b.9560856c9e771ab232d5684bbc268175db2a34e9"
+}
+
+# Return
+# {
+#   "api_token": "8371ce65ee2478ee54d3a2a356a96661cf2b206f.3eb84b0dca1eedda4aed6fb0212ed71c0b06aa83",
+#   "api_token_expiration": "2021-04-16 23:56:49"
+# }
+
+###
+
+# Clients
+GET http://localhost:5001/api/clients?api_token=c97679065667b1d1856926f8815a24616e7ee928.cef828607d045d46a1b0b440c195a8d37e1d0650
+
+# Return
+# [
+#   {
+#     "id": 1,
+#     "name": "Sanford Nolan",
+#     "created_at": "2021-04-17T03:02:03.000000Z",
+#     "updated_at": "2021-04-17T03:02:03.000000Z"
+#   },
+#   {
+#     "id": 2,
+#     "name": "Jo Welch",
+#     "created_at": "2021-04-17T03:02:03.000000Z",
+#     "updated_at": "2021-04-17T03:02:03.000000Z"
+#   }
+# ]
