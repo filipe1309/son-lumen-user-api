@@ -92,6 +92,8 @@ $app->routeMiddleware([
 |
 */
 
+$app->register(\Illuminate\Mail\MailServiceProvider::class);
+$app->register(\Illuminate\Notifications\NotificationServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
