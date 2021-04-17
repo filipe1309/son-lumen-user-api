@@ -32,15 +32,33 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'name' =>     'required | max:255',
             'email' =>    'required | email | max:255 | unique:users',
             'password' => 'required | min:6 | max:16 | confirmed',
+            'redirect' => 'url',
         ]);
 
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        Notification::send($user, new AccountCreated($user));
+        $user->verification_token = md5(Str::random(16));
+        $user->save();
+        $redirect = route('verification_account', [
+            'token' => $user->verification_token,
+            'redirect' => $request->get('redirect')
+        ]);
+        Notification::send($user, new AccountCreated($user, $redirect));
 
         return response()->json($user, 201);
     });
+
+    $router->get('/verification-account/{token}', ['as' => 'verification_account', function (Request $request, $token) {
+        $user = User::where('verification_token', $token)->firstOrFail();
+        $user->verified = true;
+        $user->verification_token = null;
+        $user->save();
+        $redirect = $request->get('redirect');
+
+        return redirect()->to($redirect);
+    }]);
+
 
     $router->post('/login', function (Request $request) {
         $this->validate($request, [
