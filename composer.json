@@ -7,6 +7,8 @@
     "require": {
         "php": "^7.3|^8.0",
         "doctrine/dbal": "^3.0",
+        "illuminate/mail": "^8.37",
+        "illuminate/notifications": "^8.37",
         "laravel/lumen-framework": "^8.0"
     },
     "require-dev": {
