@@ -33,3 +33,11 @@ docker-compose exec app-php-fpm php artisan migrate --seed
 docker-compose exec app-php-fpm php artisan migrate:refresh --seed
 
 composer require doctrine/dbal
+
+## Aula 10
+
+-> sqlite3 database/database.sqlite
+
+sqlite> UPDATE users SET api_token_expiration = '2016-12-12 00:00:00' WHERE id = 1;
+
+sqlite> SELECT \* FROM users WHERE id = 1;
