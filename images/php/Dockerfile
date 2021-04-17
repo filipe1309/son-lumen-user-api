@@ -33,6 +33,11 @@ RUN echo "[Xdebug]\n" \
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+
+# Set corrext timezone
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 USER $user
 
 RUN chown -R www-data:www-data /var/www
