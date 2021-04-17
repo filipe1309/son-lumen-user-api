@@ -28,6 +28,8 @@ POST http://localhost:5001/api/login
 
 php artisan make:migration add_api_token_to_users --table=users
 
+php artisan migrate
+
 docker-compose exec app-php-fpm php artisan migrate --seed
 
 docker-compose exec app-php-fpm php artisan migrate:refresh --seed
@@ -51,3 +53,13 @@ composer require illuminate/notifications
 ## Class 13
 
 https://mailtrap.io/
+
+## Class 14
+
+php artisan make:migration add_verification_to_users --table=users
+
+php artisan migrate
+
+php artisan migrate:refresh --seed
+
+php artisan migrate:rollback
